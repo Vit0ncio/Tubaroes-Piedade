@@ -5,6 +5,8 @@ Grupo formado por 6 pessoas pro curso de ADS na faculdade Universo, com o objeti
 Cada periodo contém uma pasta com a matéria e o projeto dedicado.  
 
 ## Sincronizando o git
+**(OBS.: Talvez necessite fazer o cadastro no git)**
+
 Primeiro, faça um fork desse repositório, lá em cima tem um botão chamado `fork`, clique nele para clonar esse repositório na sua conta pessoal.
 
 Antes de tudo, é preciso colocar esse repositório no seu pc, para isso coloque o comando no terminal:
@@ -21,16 +23,15 @@ Tubaroes-Piedade
           └─arquivos .py
 ```
 
-Depois de abrir o projeto, digite esses 3 comandos em sequência:
+Depois de abrir o projeto, é necessário atualizar seu repositório local com o repositório remoto, digite esses 4 comandos em sequência:
 ```sh
+git remote add upstream https://github.com/Vit0ncio/Tubaroes-Piedade
 git checkout main
 git pull upstream main
 git push origin main
 ```
 
-**(OBS.: Talvez necessite fazer o cadastro no git)**
-
-Quando você tiver alguma alteração para fazer em algum arquivo, digite esses comandos:
+Quando você tiver alguma alteração para fazer em algum arquivo e deseja colocar no seu repositório, digite esses comandos:
 ```sh
 git add . # ou git add <nome_arquivo> para um arquivo específico
 git commit -m "Mensagem descrevendo o que você fez no código"
