@@ -36,16 +36,13 @@ def main():
         return
 
     # Resultado
-    print("\n" + "-" * 40)
     print(f"Cliente: {nome_cliente}")
-    print("=" * 40)
     print(f"Consumo diário: {consumo_diario} kWh")
     print(f"Potência pico: {pot_pico} kWp")
     print(f"Quantidade de painéis: {qtd_paineis}")
     print(f"Custo total: R$ {custo_total}")
     print(f"Economia mensal: R$ {economia}")
     print(f"Payback estimado: {payback} meses")
-    print("-" * 40)
 
 
 # Inicia a função
