@@ -88,11 +88,11 @@ Nenhuma entrega, não é exigido na Milestone 1
 
 #### Milestone 2 (Antônio)
 
-1. Criar a classe `PainelSolar` com atributos `modelo`, `potencia_kw` e `preco`
-2. Criar a classe `Inversor` com atributos `modelo`, `potencia_kw` e `preco`
-3. Criar a classe `Bateria` com atributos `modelo`, `capacidade_ah`, `tensao_v` e `preco`
-4. Cirar listas com 2 ou 3 objetod de cada classe pra o usuário escolher pelo número
-5. Garantir que os atributos seguem o padrão que o main.py e o motor_solar esperam (ex.: `painel`, `potencia_kw`, `painel_preco`)
+~~1. Criar a classe `PainelSolar` com atributos `modelo`, `potencia_kw` e `preco`~~
+~~2. Criar a classe `Inversor` com atributos `modelo`, `potencia_kw` e `preco`~~
+~~3. Criar a classe `Bateria` com atributos `modelo`, `capacidade_ah`, `tensao_v` e `preco`~~
+~~4. Criar listas com 2 ou 3 objetos de cada classe pra o usuário escolher pelo número~~
+~~5. Garantir que os atributos seguem o padrão que o main.py e o motor_solar esperam (ex.: `painel`, `potencia_kw`, `painel_preco`)~~
 
 ## 5. proposta.py (Juan)
 
@@ -106,9 +106,9 @@ Nenhuma entrega, não é exigido na Milestone 1
 
 #### Milestone 2 (Juan)
 
-1. Recebe todos os dados calculados como parâmetro (nome, tipo, kWp, painéis, custos, payback)
+~~1. Recebe todos os dados calculados como parâmetro (nome, tipo, kWp, painéis, custos, payback)~~
 2. Imprime nome do cliente e tipo do sistema (On-Grid / Off-Grid)
-3. Imprime quantidade de painéis e kWp calculado
-4. Imprime o custo total de cada item separado (painéis, inversor, mão de obra) e o total geral
+~~3. Imprime quantidade de painéis e kWp calculado~~
+~~4. Imprime o custo total de cada item separado (painéis, inversor, mão de obra) e o total geral~~
 5. Imprime a economia mensal e o payback em meses
 6. Toda a formtação usa alinhamento de colunas com f-strings (`f"{texto:<20}"`) no estilo ticket impresso
