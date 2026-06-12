@@ -1,61 +1,111 @@
 # main.py by Arthur (arthurrqueiroz)
 
-# Importa as funções do crm.py e do motor_solar.py
+# Importação de variáveis/funções dos arquivos
 from crm import coletar_dados
-from motor_solar import *  # O * serve pra importar todas as funções do arquivo
+from motor_solar import * # >>> O '*' serve pra importar TUDO do motor_solar
 from proposta import imprimir_relatorio
+from catalogo_poo import paineis, inversores, baterias, ProjetoFotovoltaico
+
+
+# Exibe uma lista do catálogo formatada no terminal
+def exibir_catalogo(titulo, lista):
+    print("\n" + "=" * 45)
+    print(f"{titulo:^45}")
+    print("=" * 45)
+    for i, item in enumerate(lista, 1):
+        print(f"  {i}. {item.modelo:<28} R$ {item.preco:.2f}")
+    print()
+
+
+# Pede para o usuário escolher um item da lista pelo número
+def escolher_do_catalogo(lista, nome_item):
+    while True:
+        try:
+            opcao = int(input(f"Escolha o número do {nome_item}: "))
+            if 1 <= opcao <= len(lista):
+                return lista[opcao - 1]
+            print(f"Erro: Escolha um número de 1 a {len(lista)}.")
+        except ValueError:
+            print("Erro: Digite um número inteiro válido.")
 
 
 # Função principal
 def main():
-    print("--- SIMULADOR FOTOVOLTAICO ---")
+    print("\n" + "=" * 45)
+    print(f"{'SIMULADOR FOTOVOLTAICO':^45}")
+    print("=" * 45 + "\n")
 
-    # Chamada de algumas variáveis do crm.py
+    # Coleta dados básicos do cliente via crm.py
     (
         nome_cliente,
         media_consumo,
         hsp,
-        preco_painel,
-        potencia_painel,
         tarifa,
-        inversor,
         mao_obra,
+        tipo_sistema,
+        autonomia,
+        tensao,
     ) = coletar_dados()
 
-    # Chamada das funções para os cálculos
+    # M2: Exibe catálogo de painéis e deixa o usuário escolher
+    exibir_catalogo("CATÁLOGO DE PAINÉIS", paineis)
+    painel_escolhido = escolher_do_catalogo(paineis, "painel")
+
+    # M2: Exibe catálogo de inversores e deixa o usuário escolher
+    exibir_catalogo("CATÁLOGO DE INVERSORES", inversores)
+    inversor_escolhido = escolher_do_catalogo(inversores, "inversor")
+
+    # Cálculos do motor solar
     consumo_diario = calc_consumo_diario(media_consumo)
     pot_pico = pot_pico_kwp(consumo_diario, hsp)
-    qtd_paineis = calc_paineis(pot_pico, potencia_painel)
-    custo_total = calc_custo_total(qtd_paineis, preco_painel, inversor, mao_obra)
-    economia = calc_economia(media_consumo, tarifa)
-    payback = calc_payback(custo_total, economia)
+    qtd_paineis = calc_paineis(pot_pico, painel_escolhido.potencia_kw)
 
-    # Se a quantidade de painéis der zero (ou null)
-    # Ele mostra um erro
     if qtd_paineis is None:
         print("Erro no cálculo dos painéis.")
         return
 
-    # Resultado
-    print(f"Cliente: {nome_cliente}")
-    print(f"Consumo diário: {consumo_diario} kWh")
-    print(f"Potência pico: {pot_pico} kWp")
-    print(f"Quantidade de painéis: {qtd_paineis}")
-    print(f"Custo total: R$ {custo_total}")
-    print(f"Economia mensal: R$ {economia}")
-    print(f"Payback estimado: {payback} meses")
-    
-    print(imprimir_relatorio(
-        nome_cliente,
-        "On-Grid",
-        pot_pico,
-        qtd_paineis,
-        preco_painel,
-        inversor,
-        mao_obra,
-        economia,
-        payback
-    ))
+    economia = calc_economia(media_consumo, tarifa)
+
+    # Variáveis para Off-Grid (padrão: sem baterias)
+    bateria_escolhida = None
+    qtd_baterias = 0
+    custo_baterias = 0
+
+    # M2: Se Off-Grid, exibe catálogo de baterias e calcula o banco
+    if tipo_sistema == "Off-Grid":
+        exibir_catalogo("CATÁLOGO DE BATERIAS", baterias)
+        bateria_escolhida = escolher_do_catalogo(baterias, "bateria")
+
+        # Calcula a capacidade total necessária em Ah
+        capacidade_total_ah = calc_banco_bat(consumo_diario, autonomia, tensao)
+        qtd_baterias = calc_qtd_baterias(capacidade_total_ah, bateria_escolhida.capacidade_ah)
+
+        custo_baterias = qtd_baterias * bateria_escolhida.preco
+
+    # Custo total incluindo baterias (se Off-Grid)
+    custo_total = (
+        calc_custo_total(qtd_paineis, painel_escolhido.preco, inversor_escolhido.preco, mao_obra)
+        + custo_baterias
+    )
+    payback = calc_payback(custo_total, economia)
+
+    projeto = ProjetoFotovoltaico(
+        cliente = nome_cliente,
+        painel = painel_escolhido,
+        inversor = inversor_escolhido,
+        bateria = bateria_escolhida,
+    )
+
+    projeto.kwp_total = pot_pico
+    projeto.qtd_paineis = qtd_paineis
+    projeto.qtd_baterias = qtd_baterias
+    projeto.custo_total = custo_total
+    projeto.economia_mensal = economia
+    projeto.payback = payback
+
+
+    # M2: Chama proposta.py para imprimir o ticket final formatado
+    imprimir_relatorio(projeto, mao_obra, tipo_sistema)
 
 
 # Inicia a função

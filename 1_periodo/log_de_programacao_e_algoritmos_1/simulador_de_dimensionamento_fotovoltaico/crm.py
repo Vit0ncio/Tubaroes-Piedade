@@ -2,7 +2,7 @@
 
 # Função que coleta os dados do cliente
 def coletar_dados():
-    nome_cliente = input("Digite seu nome:  ")
+    nome_cliente = input("Digite seu nome: ")
 
     consumo_total = 0
 
@@ -10,13 +10,14 @@ def coletar_dados():
     for i in range(1, 13):
         while True:
             try:
-                valor = float(input(f"Digite o consumo do mês {i} (em kWh):  "))
+                valor = float(input(f"Digite o consumo do mês {i} (em kWh): "))
+
                 if valor < 0:
-                    # se for menor que zero, dá inválido e volta
                     print("Erro: O consumo não pode ser negativo. Tente novamente.")
                 else:
                     consumo_total += valor
                     break
+
             except ValueError:
                 print("Erro: Por favor, digite um número válido.")
 
@@ -25,41 +26,95 @@ def coletar_dados():
     # Pede o HSP
     while True:
         try:
-            hsp = float(input("Digite o HSP (Horas de Sol Pleno)"))
+            hsp = float(input("Digite o HSP (Horas de Sol Pleno): "))
+
             if hsp <= 0:
-                # Se for zero ou menor, dá inválido e volta
-                print(
-                    "Erro: 0 HSP deve ser maior que zero para evitar divisões inválidas."
-                )
+                print("Erro: 0 HSP deve ser maior que zero para evitar divisões inválidas.")
             else:
                 break
+
         except ValueError:
             print("Erro: Por Favor, digite um número válido para o HSP")
 
+    # Pede a tarifa
     while True:
         try:
-            preco_painel = float(input("Digite o valor da placa: "))
-            if preco_painel <= 0:
-                print(
-                    "Erro: O preço do painel deve ser maior que zero para evitar divisões inválidas."
-                )
+            tarifa = float(input("Digite a tarifa da concessionária (R$/kWh): "))
+
+            if tarifa <= 0:
+                print("Erro: A tarifa deve ser maior que zero.")
             else:
                 break
-        except ValueError:
-            print("Erro: Por Favor, digite um número válido para o preço do painel")
 
-    potencia_painel = float(input("Digite a potência do painel (W): "))
-    tarifa = float(input("Digite a tarifa da rua: "))
-    inversor = float(input("Digite o valor do inversor: "))
-    mao_obra = float(input("Digite o valor da mão de obra: "))
+        except ValueError:
+            print("Erro: Por favor, digite um número válido para a tarifa.")
+
+    # Pede a mão de obra
+    while True:
+        try:
+            mao_obra = float(input("Digite o valor da mão de obra (R$): "))
+
+            if mao_obra < 0:
+                print("Erro: O valor não pode ser negativo.")
+            else:
+                break
+
+        except ValueError:
+            print("Erro: Por favor, digite um número válido.")
+
+
+    # M2: Pergunta o tipo de sistema
+    while True:
+        print("\nTipo de sistema:")
+        print("1 - On-Grid (conectado à rede, sem baterias)")
+        print("2 - Off-Grid (isolado, com banco de baterias)")
+        tipo_input = input("Escolha (1 ou 2): ").strip()
+
+        match tipo_input:
+            case "1":
+                tipo_sistema = "On-Grid"
+                break
+
+            case "2":
+                tipo_sistema = "Off-Grid"
+                break
+
+            case _:
+                print("Erro: Digite 1 para On-Grid ou 2 para Off-Grid")
+
+    autonomia = None
+    tensao = None
+
+    if tipo_sistema == "Off-Grid":
+        while True:
+            try:
+                autonomia = float(input("Digite a autonomia desejada (em dias sem sol): "))
+
+                if autonomia <= 0:
+                    print("Erro: A autonomia deve ser maior que zero.")
+                else:
+                    break
+
+            except ValueError:
+                print("Erro: Por favor, digite um número válido.")
+
+        while True:
+            tensao_input = input("Digite a tensão do sistema (24 ou 48): ").strip()
+
+            if tensao_input == "24" or tensao_input == "48":
+                tensao = float(tensao_input)
+                break
+
+            print("Erro: A tensão deve ser 24 ou 48.")
 
     return (
         nome_cliente,
         media_consumo,
         hsp,
-        preco_painel,
-        potencia_painel,
         tarifa,
-        inversor,
         mao_obra,
+        tipo_sistema,
+        autonomia,
+        tensao,
     )
+
