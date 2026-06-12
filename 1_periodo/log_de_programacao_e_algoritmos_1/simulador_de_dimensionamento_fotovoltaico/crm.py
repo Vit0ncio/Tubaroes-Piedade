@@ -68,8 +68,9 @@ def coletar_dados():
         print("\nTipo de sistema:")
         print("1 - On-Grid (conectado à rede, sem baterias)")
         print("2 - Off-Grid (isolado, com banco de baterias)")
-        tipo_input = input("Escolha (1 ou 2): ").strip()
+        tipo_input = input("Escolha (1 ou 2): ").strip() # >>> Remove espaços em branco
 
+        # Switch case pros sistemas (escolha e caso)
         match tipo_input:
             case "1":
                 tipo_sistema = "On-Grid"
@@ -79,6 +80,7 @@ def coletar_dados():
                 tipo_sistema = "Off-Grid"
                 break
 
+            # O equivalente de default em outras linguagens
             case _:
                 print("Erro: Digite 1 para On-Grid ou 2 para Off-Grid")
 
@@ -105,8 +107,10 @@ def coletar_dados():
                 tensao = float(tensao_input)
                 break
 
+            # Mostra erro caso a tensão não seja 24 ou 48
             print("Erro: A tensão deve ser 24 ou 48.")
 
+    # Retorna os dados usados na função
     return (
         nome_cliente,
         media_consumo,
@@ -117,4 +121,3 @@ def coletar_dados():
         autonomia,
         tensao,
     )
-

@@ -6,7 +6,6 @@ from motor_solar import * # >>> O '*' serve pra importar TUDO do motor_solar
 from proposta import imprimir_relatorio
 from catalogo_poo import paineis, inversores, baterias, ProjetoFotovoltaico
 
-
 # Exibe uma lista do catálogo formatada no terminal
 def exibir_catalogo(titulo, lista):
     print("\n" + "=" * 45)
@@ -22,8 +21,13 @@ def escolher_do_catalogo(lista, nome_item):
     while True:
         try:
             opcao = int(input(f"Escolha o número do {nome_item}: "))
+
+            # Garante que a opção esteja dentro dos limites da lista
+            # O 'if 1' garante que o usuário não digitou zero
+            # O 'opcao <= len(lista)' garante que a opção escolhida não seja maior
+            # que a quantidade de produtos na lista
             if 1 <= opcao <= len(lista):
-                return lista[opcao - 1]
+                return lista[opcao - 1] # >>> Retorna o item escolhido menos 1, pois o índice começa em zero, e os itens são numerados de 1 pra cima
             print(f"Erro: Escolha um número de 1 a {len(lista)}.")
         except ValueError:
             print("Erro: Digite um número inteiro válido.")

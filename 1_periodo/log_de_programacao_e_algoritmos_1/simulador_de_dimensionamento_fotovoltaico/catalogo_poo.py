@@ -1,6 +1,7 @@
 # catalogo_poo.py by Antônio (AntonioOliveira-Web)
 
 # CLASSES PARA CADA TIPO DE PRODUTO PARA CRIAR O CATALAGO
+# Classe principal do sistema
 class ProjetoFotovoltaico:
     def __init__(
         self,
