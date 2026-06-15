@@ -37,10 +37,10 @@ Vai juntar tudo no `main.py`, vai pegar as funções de outros arquivos e chamar
 
 #### Milestone 2 (Arthur)
 
-1. Mostra o catálogo do `catalogo_poo` e deixa o usuário escolher o painel, inversor e bateria pelo número
-2. Pergunta se é On-Grid ou Off-Grid e redireciona o fluxo
-3. Se Off-Grid, chama o cálculo de baterias do `motor_solar`
-4. Chama o `proposta.py` para imprimir o ticket final formatado
+~~1. Mostra o catálogo do `catalogo_poo` e deixa o usuário escolher o painel, inversor e bateria pelo número~~  
+~~2. Pergunta se é On-Grid ou Off-Grid e redireciona o fluxo~~  
+~~3. Se Off-Grid, chama o cálculo de baterias do `motor_solar`~~  
+~~4. Chama o `proposta.py` para imprimir o ticket final formatado~~  
 
 ## 2. crm.py (Carlos)
 
@@ -52,13 +52,13 @@ Vai criar o formulário com as perguntas pro usuário responder.
 
 ~~1. Pede o nome do cliente~~  
 ~~2. Pede o consumo dos 12 meses um por um usando `for`, recusando qualquer valor negativo~~  
-~~3. Calcula a média dos 12 meses automaticamente~~  
+~~3. Calcula a média dos 12 meses automaticamente~~   
 ~~4. Pede o HSP da cidade e recusa valor zero ou negativo (evita divisão por zero no motor_solar)~~  
 
 #### Milestone 2 (Carlos)
 
-1. Pergunta se o sistema é On-Grid ou Off-Grid
-2. Se Off-Grid, pede a autonomia em dias e a tensão do sistema (ex.: 24V ou 48V)
+1. Pergunta se o sistema é On-Grid ou Off-Grid~~  
+2. Se Off-Grid, pede a autonomia em dias e a tensão do sistema (ex.: 24V ou 48V)~~  
 
 ## 3. motor_solar.py (Vitor)
 
@@ -108,7 +108,7 @@ Nenhuma entrega, não é exigido na Milestone 1
 
 ~~1. Recebe todos os dados calculados como parâmetro (nome, tipo, kWp, painéis, custos, payback)~~  
 2. Imprime nome do cliente e tipo do sistema (On-Grid / Off-Grid)
-~~3. Imprime quantidade de painéis e kWp calculado~~  
+~~3. Imprime quantidade de painéis e kWp calculado~~    
 ~~4. Imprime o custo total de cada item separado (painéis, inversor, mão de obra) e o total geral~~  
-5. Imprime a economia mensal e o payback em meses
+~~5. Imprime a economia mensal e o payback em meses~~   
 ~~6. Toda a formtação usa alinhamento de colunas com f-strings (`f"{texto:<20}"`) no estilo ticket impresso~~
