@@ -107,7 +107,7 @@ Nenhuma entrega, não é exigido na Milestone 1
 #### Milestone 2 (Juan)
 
 ~~1. Recebe todos os dados calculados como parâmetro (nome, tipo, kWp, painéis, custos, payback)~~  
-2. Imprime nome do cliente e tipo do sistema (On-Grid / Off-Grid)
+~~2. Imprime nome do cliente e tipo do sistema (On-Grid / Off-Grid)~~  
 ~~3. Imprime quantidade de painéis e kWp calculado~~    
 ~~4. Imprime o custo total de cada item separado (painéis, inversor, mão de obra) e o total geral~~  
 ~~5. Imprime a economia mensal e o payback em meses~~   
