@@ -57,8 +57,8 @@ Vai criar o formulário com as perguntas pro usuário responder.
 
 #### Milestone 2 (Carlos)
 
-1. Pergunta se o sistema é On-Grid ou Off-Grid~~  
-2. Se Off-Grid, pede a autonomia em dias e a tensão do sistema (ex.: 24V ou 48V)~~  
+~~1. Pergunta se o sistema é On-Grid ou Off-Grid~~  
+~~2. Se Off-Grid, pede a autonomia em dias e a tensão do sistema (ex.: 24V ou 48V)~~  
 
 ## 3. motor_solar.py (Vitor)
 
